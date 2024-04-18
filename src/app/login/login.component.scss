@@ -1,0 +1,147 @@
+
+
+// Фоновый стиль страницы
+:host {
+    background-color: #f2f2f2; // Серый цвет фона
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+// Стили для заголовка
+.login-title {
+    text-align: center;
+    margin-bottom: 30px; // Отступ между заголовком и формой
+    color: #333; // Цвет текста
+    font-size: 24px; // Размер шрифта
+    font-weight: bold; // Жирный шрифт
+}
+
+// Стили для контейнера формы
+.login-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// Стили для формы входа
+.login-form {
+    width: 350px; // Большая ширина формы
+    padding: 20px;
+    padding-top: 30px;
+    border-radius: 10px; // Немного больший радиус скругления
+    background-color: #fff; // Белый фон формы
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); // Увеличенная тень для формы
+
+
+    .form-group {
+        position: relative;
+        margin-bottom: 30px;
+
+        label {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            color: #999;
+            transition: 0.3s ease all;
+            pointer-events: none; /* Лейблы не должны быть интерактивными */
+        }
+
+        input {
+            width: 100%;
+            padding: 10px 0;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            outline: none;
+            background: transparent;
+            transition: 0.3s ease border-bottom-color;
+        }
+
+        .highlight {
+            position: absolute;
+            height: 1px;
+            width: 100%;
+            background: #007bff;
+            bottom: -1px;
+            left: 0;
+            pointer-events: none;
+            transition: 0.3s ease all;
+        }
+
+        .bar {
+            position: relative;
+            display: block;
+            width: 0;
+        }
+
+        input:focus ~ .highlight {
+            animation: inputHighlighter 0.3s ease;
+        }
+
+        input:not(:placeholder-shown) ~ label,
+        input:focus:not(:placeholder-shown) ~ label {
+            top: -20px;
+            font-size: 14px;
+            color: #007bff;
+        }
+
+        input:focus:not(:placeholder-shown) ~ label {
+            color: #007bff; /* Изменение цвета лейбла при фокусировке на инпуте */
+        }
+
+        input:focus ~ .bar::before,
+        input:focus ~ .bar::after {
+            width: 50%;
+        }
+
+        input::-webkit-input-placeholder {
+            color: transparent;
+        }
+
+        input::-moz-placeholder {
+            color: transparent;
+        }
+
+        input:-ms-input-placeholder {
+            color: transparent;
+        }
+
+        input::placeholder {
+            color: transparent;
+        }
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+    }
+
+    .error-message {
+        color: red;
+        margin-top: 10px;
+    }
+}
+
+@keyframes inputHighlighter {
+    from {
+        background: #007bff;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
